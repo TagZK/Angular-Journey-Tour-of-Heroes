@@ -1,2 +1,2 @@
 # Angular-Journey-Tour-of-Heroes
-Learning Angular threw a Tutorial
+Learning Angular through a Tutorial : https://angular.io/tutorial
