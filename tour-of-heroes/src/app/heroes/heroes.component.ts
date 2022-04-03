@@ -12,10 +12,6 @@ export class HeroesComponent implements OnInit {
 
   heroes : Hero[] = [];
 
-  hero : Hero = {
-    id : 1,
-    name : 'Windstorm'
-  }
   constructor(private heroService : HeroService, private messageService : MessageService) { }
 
   ngOnInit(): void {
@@ -23,10 +19,33 @@ export class HeroesComponent implements OnInit {
           .subscribe(heroes => this.heroes = heroes);
   }
 
-  selectedHero? : Hero;
+  /*selectedHero? : Hero;
   onSelect(hero : Hero): void {
     this.selectedHero = hero;
     this.messageService.add(`Hero \"${hero.name}\" selected !`);
+  }*/
+
+  /*getMaxID() : number{
+    return Math.max.apply(Math, this.heroes.map(hero => {return hero.id;})) + 1;
+  }*/
+
+  add(name : string) : void {
+    name = name.trim();
+    if(!name){
+      return ;
+    }
+
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => this.heroes.push(hero));
+  }
+
+  delete(hero : Hero): void {
+    if(!hero){
+      return ;
+    }
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero.id)
+      .subscribe();
   }
 
 }
